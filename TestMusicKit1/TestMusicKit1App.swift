@@ -11,7 +11,8 @@ import SwiftUI
 struct TestMusicKit1App: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+            PlaylistView()
         }
     }
 }
