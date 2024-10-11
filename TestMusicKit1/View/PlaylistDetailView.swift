@@ -1,10 +1,3 @@
-//
-//  PlaylistView.swift
-//  TestMusicKit1
-//
-//  Created by a on 11.10.24.
-//
-
 import SwiftUI
 import MediaPlayer
 
@@ -29,46 +22,48 @@ struct PlaylistDetailView: View {
             }
             
             // 歌曲列表
-            List(playlist.items, id: \.persistentID) { item in
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text(item.title ?? "未知歌曲")
-                            .font(.headline)
-                        Text(item.artist ?? "未知艺术家")
-                            .font(.subheadline)
+            List {
+                ForEach(playlist.items, id: \.persistentID) { item in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(item.title ?? "未知歌曲")
+                                .font(.headline)
+                            Text(item.artist ?? "未知艺术家")
+                                .font(.subheadline)
+                        }
+                        
+                        Spacer()
+                        
+                        // 收藏按钮
+                        Button(action: {
+                            viewModel.toggleFavorite(song: item)
+                        }) {
+                            Image(systemName: viewModel.isFavorite(song: item) ? "heart.fill" : "heart")
+                                .foregroundColor(viewModel.isFavorite(song: item) ? .red : .gray)
+                        }
+                        .buttonStyle(PlainButtonStyle())
                     }
-                    
-                    Spacer()
-                    
-                    // 收藏按钮
-                    Button(action: {
-                        viewModel.toggleFavorite(song: item)
-                    }) {
-                        Image(systemName: viewModel.isFavorite(song: item) ? "heart.fill" : "heart")
-                            .foregroundColor(viewModel.isFavorite(song: item) ? .red : .gray)
+                    .foregroundStyle(item == viewModel.currentSong ? .red : .blue)
+                    .contentShape(Rectangle()) // 让整个行可点击
+                    .onTapGesture {
+                        viewModel.playSong(item, in: playlist)
                     }
-                    .buttonStyle(PlainButtonStyle())
-                }
-                .contentShape(Rectangle()) // 让整个行可点击
-                .onTapGesture {
-                    viewModel.playSong(item, in: playlist)
-                }
-                .contextMenu {
-                    Button(action: {
-                        // 删除歌曲
-                        viewModel.deleteSong(item, from: playlist)
-                    }) {
-                        Text("删除歌曲")
-                        Image(systemName: "trash")
-                    }
-                    
-                    Button(action: {
-                        // 将歌曲添加到其他歌单
-                        // 此处需要实现选择目标歌单的逻辑
-                        viewModel.addSong(item, to: playlist)
-                    }) {
-                        Text("将歌曲添加到列表")
-                        Image(systemName: "plus.circle")
+                    .contextMenu {
+                        Button(action: {
+                            // 删除歌曲
+                            viewModel.deleteSong(item, from: playlist)
+                        }) {
+                            Text("删除歌曲")
+                            Image(systemName: "trash")
+                        }
+                        
+                        Button(action: {
+                            // 将歌曲添加到其他歌单
+                            viewModel.addSong(item, to: playlist)
+                        }) {
+                            Text("将歌曲添加到列表")
+                            Image(systemName: "plus.circle")
+                        }
                     }
                 }
             }

@@ -37,6 +37,22 @@ class PlaylistViewModel: ObservableObject {
             }
             .store(in: &cancellables)
         
+        // 监听当前播放歌曲变化
+        NotificationCenter.default.publisher(for: .MPMusicPlayerControllerNowPlayingItemDidChange, object: musicPlayer)
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                if let nowPlaying = self.musicPlayer.nowPlayingItem{
+                    self.currentSong = nowPlaying
+                } else {
+                    // 没有当前播放的歌曲，可能播放已停止
+                    DispatchQueue.main.async {
+                        self.currentSong = nil
+                        self.currentIndex = nil
+                    }
+                }
+            }
+            .store(in: &cancellables)
+        
         musicPlayer.beginGeneratingPlaybackNotifications()
     }
     
@@ -87,7 +103,9 @@ class PlaylistViewModel: ObservableObject {
     
     /// 播放选中的歌曲
     func playSong(_ song: MPMediaItem, in playlist: Playlist) {
-        musicPlayer.setQueue(with: MPMediaItemCollection(items: [song]))
+        musicPlayer.setQueue(with: MPMediaItemCollection(items: currentPlaylist?.items ?? []))
+        musicPlayer.nowPlayingItem = song
+        musicPlayer.prepareToPlay()
         musicPlayer.play()
         print("正在播放: \(song.title ?? "未知歌曲")")
         DispatchQueue.main.async {
