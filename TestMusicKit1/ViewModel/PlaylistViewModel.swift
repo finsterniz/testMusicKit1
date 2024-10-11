@@ -74,6 +74,7 @@ class PlaylistViewModel: ObservableObject {
                 }
             }
         } else if status == .authorized {
+            print("用户已经授权")
             fetchPlaylists()
         } else {
             print("无法访问媒体库。请在设置中授权。")
