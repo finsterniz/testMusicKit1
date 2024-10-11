@@ -14,6 +14,7 @@
 		00C7B5902CB8841400734372 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C7B58F2CB8841400734372 /* Playlist.swift */; };
 		00C7B5922CB8844F00734372 /* PlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C7B5912CB8844F00734372 /* PlaylistViewModel.swift */; };
 		00C7B5942CB88C7F00734372 /* PlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C7B5932CB88C7F00734372 /* PlaylistView.swift */; };
+		00C7B5962CB8952D00734372 /* PlaylistDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C7B5952CB8952D00734372 /* PlaylistDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		00C7B58F2CB8841400734372 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		00C7B5912CB8844F00734372 /* PlaylistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViewModel.swift; sourceTree = "<group>"; };
 		00C7B5932CB88C7F00734372 /* PlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistView.swift; sourceTree = "<group>"; };
+		00C7B5952CB8952D00734372 /* PlaylistDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				00C7B5932CB88C7F00734372 /* PlaylistView.swift */,
+				00C7B5952CB8952D00734372 /* PlaylistDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 				00C7B5922CB8844F00734372 /* PlaylistViewModel.swift in Sources */,
 				007FB7192CB7289C00C4CCFF /* ContentView.swift in Sources */,
 				007FB7172CB7289C00C4CCFF /* TestMusicKit1App.swift in Sources */,
+				00C7B5962CB8952D00734372 /* PlaylistDetailView.swift in Sources */,
 				00C7B5902CB8841400734372 /* Playlist.swift in Sources */,
 				00C7B5942CB88C7F00734372 /* PlaylistView.swift in Sources */,
 			);
