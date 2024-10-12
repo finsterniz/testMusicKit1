@@ -53,6 +53,18 @@ class PlaylistViewModel: ObservableObject {
             }
             .store(in: &cancellables)
         
+        // 监听MPMediaLibrary是否产生变化
+//        MPMediaLibrary.default().beginGeneratingLibraryChangeNotifications()
+        
+        // 当library Chans变化时候, 更新我们的list
+        // 这里可能不是很需要, 因为我们只要软件启动时候fetch一次就可以? 增删改查都在软件里利用副本就好了
+//        NotificationCenter.default.publisher(for: .MPMediaLibraryDidChange)
+//            .sink { [weak self] _ in
+//                guard let self = self else { return }
+//                fetchPlaylists()
+//            }
+//            .store(in: &cancellables)
+        
         musicPlayer.beginGeneratingPlaybackNotifications()
     }
     
@@ -128,28 +140,30 @@ class PlaylistViewModel: ObservableObject {
     
     /// 播放下一首
     func playNext() {
-        guard let playlist = currentPlaylist,
-              let currentIndex = currentIndex,
-              currentIndex + 1 < playlist.items.count else {
-            print("已经是最后一首歌曲。")
-            return
-        }
-        
-        let nextSong = playlist.items[currentIndex + 1]
-        playSong(nextSong, in: playlist)
+//        guard let playlist = currentPlaylist,
+//              let currentIndex = currentIndex,
+//              currentIndex + 1 < playlist.items.count else {
+//            print("已经是最后一首歌曲。")
+//            return
+//        }
+//        
+//        let nextSong = playlist.items[currentIndex + 1]
+//        playSong(nextSong, in: playlist)
+        musicPlayer.skipToNextItem()
     }
     
     /// 播放上一首
     func playPrevious() {
-        guard let playlist = currentPlaylist,
-              let currentIndex = currentIndex,
-              currentIndex - 1 >= 0 else {
-            print("已经是第一首歌曲。")
-            return
-        }
-        
-        let previousSong = playlist.items[currentIndex - 1]
-        playSong(previousSong, in: playlist)
+//        guard let playlist = currentPlaylist,
+//              let currentIndex = currentIndex,
+//              currentIndex - 1 >= 0 else {
+//            print("已经是第一首歌曲。")
+//            return
+//        }
+//        
+//        let previousSong = playlist.items[currentIndex - 1]
+//        playSong(previousSong, in: playlist)
+        musicPlayer.skipToPreviousItem()
     }
     
     /// 收藏或取消收藏歌曲
